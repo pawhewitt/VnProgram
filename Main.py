@@ -41,7 +41,10 @@ from numpy import *
 import numpy
 #####################################################################################
 ######Catia Perturbation Script##################
-from increment_parameters1 import IncrementParameters
+
+# Temp 1 Feb 2018 Philp Hewitt -----Commented for standalone 
+#from increment_parameters1 import IncrementParameters
+
 #################################################
 ######Display Module############
 from CreateAbaqusODB import CreateAbaqusODB
@@ -82,6 +85,7 @@ def Main(adjoint_data_path = "None", directory_path = "None", file_type = "VRML"
         senstivity_data_file.close()
 
     elif data=="disp":
+        print local_path
         parameter_number = 0
         while True:
             if os.path.exists(local_path+ str(parameter_number+1) + ".stp"):
@@ -89,6 +93,7 @@ def Main(adjoint_data_path = "None", directory_path = "None", file_type = "VRML"
             else:
                 break        
         number_of_parameters = parameter_number
+
         #parameter_number = 0
                    
         current_part_name = "Part_1"
@@ -139,14 +144,20 @@ def Main(adjoint_data_path = "None", directory_path = "None", file_type = "VRML"
 
 #===================================================================================================================================
 if __name__ == "__main__":
-        
+    
+    # Get path for Step Files
+    import os
+    Vn_Run= os.environ['Vn_Run']
+
+
+
     #Provide the details of test case as below by using 0 or 1
 
     SU2=1
 
     if SU2 == 1:
         adjoint_data_path = "None"#"F:/WingTestCase/Optimization/NACA2D/Thickness-18-Drag-Zeroalpha/SensDataFiles/"
-        directory_path="/home/phewitt/Testing/VnProgram"
+        directory_path=Vn_Run
         current_min_separation = 1 # Max design velocity expected based on perturbation
         adj_type = 4
 
@@ -154,7 +165,7 @@ if __name__ == "__main__":
     angle_tolerance = 30 # used to compare two face normals for projection validation
     angthreshold = 2    # used to verify the orientation of nearby cells for averaging
     data = "disp"      # to use parameters in opened CATIA V5 model
-    local_dir ="/Step"
+    local_dir ="Step/"
     
     ResultMain=Main(adjoint_data_path, directory_path, file_type,0.5,0.5,local_dir,data,current_min_separation,angle_tolerance,angthreshold,adj_type)
     
