@@ -146,7 +146,7 @@ if __name__ == "__main__":
 
     if SU2 == 1:
         adjoint_data_path = "None"#"F:/WingTestCase/Optimization/NACA2D/Thickness-18-Drag-Zeroalpha/SensDataFiles/"
-        directory_path="F:/WingTestCase/Optimization/"
+        directory_path="/home/phewitt/Testing/VnProgram"
         current_min_separation = 1 # Max design velocity expected based on perturbation
         adj_type = 4
 
@@ -154,7 +154,7 @@ if __name__ == "__main__":
     angle_tolerance = 30 # used to compare two face normals for projection validation
     angthreshold = 2    # used to verify the orientation of nearby cells for averaging
     data = "disp"      # to use parameters in opened CATIA V5 model
-    local_dir ="StepFiles/"
+    local_dir ="/Step"
     
     ResultMain=Main(adjoint_data_path, directory_path, file_type,0.5,0.5,local_dir,data,current_min_separation,angle_tolerance,angthreshold,adj_type)
     
